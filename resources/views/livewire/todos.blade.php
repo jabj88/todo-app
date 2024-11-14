@@ -1,7 +1,8 @@
 <?php
 
-use function Livewire\Volt\{state, with};
+use function Livewire\Volt\{state, with, on};
 
+state(['task']);
 with([
     'todos' => fn() => \App\Models\Todo::all(),
 ]);
@@ -10,10 +11,16 @@ $add = function () {
     \App\Models\Todo::create([
         'task' => $this->task,
         'status' => 'pending',
+        'completed_at' => '',
     ]);
     $this->task = '';
 };
-
+//todo: ineficient method - fix
+on([
+    'item_removed' => function () {
+        $todos = \App\Models\Todo::all();
+    },
+]);
 ?>
 
 <div>
