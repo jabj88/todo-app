@@ -15,5 +15,6 @@
     </head>
     <body class="antialiased font-sans">
         my todos app
+        <livewire:todos />
     </body>
 </html>
