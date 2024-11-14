@@ -2,7 +2,6 @@
 
 use function Livewire\Volt\{state, with};
 
-state(['task']);
 with([
     'todos' => fn() => \App\Models\Todo::all(),
 ]);
@@ -13,14 +12,6 @@ $add = function () {
         'status' => 'pending',
     ]);
     $this->task = '';
-};
-
-$remove = function ($id) {
-    \App\Models\Todo::where('id', $id)->delete();
-};
-
-$updateStatus = function ($todo) {
-    \App\Models\Todo::where('id', $todo['id'])->update(['status' => $todo['status'] === 'pending' ? 'completed' : 'pending']);
 };
 
 ?>
@@ -34,14 +25,7 @@ $updateStatus = function ($todo) {
         </form>
         <div>
             @foreach ($todos as $todo)
-                <div>
-                    <div>
-                        <input type="checkbox" {{ $todo->status == 'completed' ? 'checked' : '' }}
-                            wire:click='updateStatus({{ $todo }})' />
-                        {{ $todo->task }} - {{ $todo->status }}
-                    </div>
-                    <button wire:click='remove({{ $todo->id }})'> delete </button>
-                </div>
+                <livewire:task :todo="$todo" :key="$todo->key" />
             @endforeach
         </div>
     </div>
