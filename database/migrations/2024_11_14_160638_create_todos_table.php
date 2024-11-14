@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('task');
             $table->enum('status', ['pending', 'completed']);
-            $table->timestamp('createdAt')->useCurrent();
-            $table->timestamp('completedAt');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(null);
         });
     }
 
