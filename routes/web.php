@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'todosHome');
 
-Route::get('analytics', [Analytics::class, 'index']);
-
+Route::view('/report', 'analytics-page');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

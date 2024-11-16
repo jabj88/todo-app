@@ -24,6 +24,10 @@ on([
 ?>
 
 <div>
+    <nav>
+        <li><a href="/">Home</a></li>
+        <li><a href="/report">Analitycs</a></li>
+    </nav>
     Todo List:
     <div>
         <form wire:submit='add'>
@@ -32,7 +36,7 @@ on([
         </form>
         <div>
             @foreach ($todos as $todo)
-                <livewire:task :todo="$todo" :key="$todo->key" />
+                <livewire:task :todo="$todo" :key="$todo->id" />
             @endforeach
         </div>
     </div>
