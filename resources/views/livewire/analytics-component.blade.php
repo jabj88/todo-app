@@ -51,11 +51,11 @@ $getRangeData = function () {
         <h1 class="m-5 text-5xl font-bold">
             Here are some stats
         </h1>
-        <h2 class="m-5 text-2xl">
-            From <input class="text-center bg-transparent" style="color-scheme:dark" type="date" wire:model='from'
-                wire:change='getRangeData' />
-            To <input class="text-center bg-transparent" style="color-scheme:dark" type="date" wire:model='to'
-                wire:change='getRangeData' />
+        <h2 class="flex flex-col gap-2 m-5 text-2xl text-center md:block ">
+            <span>From</span> <input class="self-center flex-shrink text-center bg-transparent w-44 "
+                style="color-scheme:dark" type="date" wire:model='from' wire:change='getRangeData' />
+            <span>To</span> <input class="self-center flex-shrink text-center bg-transparent w-44"
+                style="color-scheme:dark" type="date" wire:model='to' wire:change='getRangeData' />
         </h2>
         @if ($totalTasks == 0)
             <h2 class="m-5 text-2xl">
@@ -65,12 +65,7 @@ $getRangeData = function () {
         @else
             <div>You created a total of <span class="text-xl font-bold">{{ $totalTasks }}</span> tasks </div>
             <div>completed <span class="text-xl font-bold">{{ count($todosCompleted) }}</span>
-                And <span class="text-xl font-bold">{{ count($todosPending) }} </span>
-                @if (count($todosPending) <= 1)
-                    is
-                @else
-                    are
-                @endif still pending for completion
+                out of <span class="text-xl font-bold">{{ $totalTasks }}</span> tasks you wanted to accomplish.
             </div>
             <div>Your Completion Rate is: <span class="text-xl font-bold">{{ $this->completion_rate }}<span>%</div>
         @endif
@@ -80,7 +75,9 @@ $getRangeData = function () {
     @if (count($todosPending) > 0)
         <div>
             <hr class="w-11/12 mx-auto my-10 border-indigo-600" />
-            <h3 class="text-xl "> Try Closing this tasks to get to 100% rate </h3>
+            <h3 class="text-xl "> Try Completing <span class="text-xl font-bold">{{ count($todosPending) }}</span> more
+                to get
+                a <span class="text-xl font-bold">100%</span> success rate </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-max ">
                 @foreach ($todosPending as $todo)
                     <livewire:task :todo="$todo" :key="$todo->id" />
