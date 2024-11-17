@@ -15,12 +15,7 @@ $add = function () {
     ]);
     $this->task = '';
 };
-//todo: ineficient method - fix
-on([
-    'item_removed' => function () {
-        $todos = \App\Models\Todo::all();
-    },
-]);
+on(['item_removed']);
 ?>
 
 <div class="grid grid-rows-[50px_auto_60px] h-screen">
