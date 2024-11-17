@@ -35,10 +35,7 @@ $completion_rate = computed(function () {
 ?>
 
 <div>
-    <nav>
-        <li><a href="/">Home</a></li>
-        <li><a href="/report">Analitycs</a></li>
-    </nav>
+    <x-menu class="flex flex-row self-center gap-5 p-2 font-bold text-white list-none justify-self-center " />
     {{ $from }} -{{ $to }}
     <div>Total Tasks Created: {{ $totalTasks }}</div>
     <div>Completed: {{ count($todosCompleted) }}</div>

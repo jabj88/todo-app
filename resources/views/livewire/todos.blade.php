@@ -24,10 +24,8 @@ on([
 ?>
 
 <div class="grid grid-rows-[50px_auto_60px] h-screen">
-    <nav class="flex flex-row self-center gap-5 p-2 font-bold text-white list-none justify-self-center ">
-        <li><a href="/">Home</a></li>
-        <li><a href="/report">Analitycs</a></li>
-    </nav>
+
+    <x-menu class="flex flex-row self-center gap-5 p-2 font-bold text-white list-none justify-self-center " />
 
     <div class="justify-center px-10 py-5 overflow-y-auto align-middle">
         @foreach ($todos as $todo)
