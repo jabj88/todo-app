@@ -23,22 +23,22 @@ on([
 ]);
 ?>
 
-<div>
-    <nav>
+<div class="grid grid-rows-[50px_auto_60px] h-screen">
+    <nav class="flex flex-row self-center gap-5 p-2 font-bold text-white list-none justify-self-center ">
         <li><a href="/">Home</a></li>
         <li><a href="/report">Analitycs</a></li>
     </nav>
-    Todo List:
-    <div>
-        <form wire:submit='add'>
-            <input type=text wire:model='task' />
-            <button type='submit'> Save </button>
-        </form>
-        <div>
-            @foreach ($todos as $todo)
-                <livewire:task :todo="$todo" :key="$todo->id" />
-            @endforeach
-        </div>
+
+    <div class="justify-center px-10 py-5 overflow-y-auto align-middle">
+        @foreach ($todos as $todo)
+            <livewire:task :todo="$todo" :key="$todo->id" />
+        @endforeach
     </div>
+
+    <form wire:submit='add' class="flex flex-row items-center gap-1 px-8 py-3 bg-indigo-900 shadow-lg justify-evenly">
+        <input class="w-11/12 rounded-md" type=text wire:model='task' />
+        <button class="bg-green-400 rounded-full w-7 h-7 justify-items-center" type='submit'> <x-akar-send
+                class="w-4 h-4 text-white" /> </button>
+    </form>
 
 </div>
