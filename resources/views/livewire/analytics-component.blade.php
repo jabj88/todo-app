@@ -13,6 +13,18 @@ mount(function () {
         $this->from = Carbon::now()->subDays(7)->format('Y-m-d');
         $this->to = Carbon::now()->format('Y-m-d');
     }
+    $this->getRangeData();
+});
+
+$completion_rate = computed(function () {
+    if (!$this->totalTasks) {
+        return 0;
+    }
+    $rate = (count($this->todosCompleted) * 100) / $this->totalTasks;
+    return round($rate, 2);
+});
+
+$getRangeData = function () {
     //add one day to search param to cover whole day
     $plusDay = Carbon::createFromFormat('Y-m-d', $this->to)
         ->addDays(1)
@@ -28,17 +40,8 @@ mount(function () {
         ->where('status', 'pending')
         ->whereBetween('created_at', [$this->from, $plusDay])
         ->get();
-
     $this->totalTasks = count($this->todosCompleted) + count($this->todosPending);
-});
-
-$completion_rate = computed(function () {
-    if (!$this->totalTasks) {
-        return 0;
-    }
-    $rate = (count($this->todosCompleted) * 100) / $this->totalTasks;
-    return round($rate, 2);
-});
+};
 
 ?>
 
@@ -49,7 +52,8 @@ $completion_rate = computed(function () {
             Here are some stats
         </h1>
         <h2 class="m-5 text-2xl">
-            From {{ $from }} To {{ $to }}
+            From <input class="text-center bg-transparent" type="date" wire:model='from' wire:change='getRangeData' />
+            To <input class="text-center bg-transparent "type="date" wire:model='to' wire:change='getRangeData' />
         </h2>
         @if ($totalTasks == 0)
             <h2 class="m-5 text-2xl">
@@ -59,7 +63,12 @@ $completion_rate = computed(function () {
         @else
             <div>You created a total of <span class="text-xl font-bold">{{ $totalTasks }}</span> tasks </div>
             <div>completed <span class="text-xl font-bold">{{ count($todosCompleted) }}</span>
-                And <span class="text-xl font-bold">{{ count($todosPending) }} </span> are still pending for completion
+                And <span class="text-xl font-bold">{{ count($todosPending) }} </span>
+                @if (count($todosPending) >= 1)
+                    is
+                @else
+                    are
+                @endif still pending for completion
             </div>
             <div>Your Completion Rate is: <span class="text-xl font-bold">{{ $this->completion_rate }}<span>%</div>
         @endif
