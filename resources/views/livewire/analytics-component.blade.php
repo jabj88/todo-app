@@ -81,7 +81,7 @@ $getRangeData = function () {
         <div>
             <hr class="w-11/12 mx-auto my-10 border-indigo-600" />
             <h3 class="text-xl "> Try Closing this tasks to get to 100% rate </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-max ">
                 @foreach ($todosPending as $todo)
                     <livewire:task :todo="$todo" :key="$todo->id" />
                 @endforeach
