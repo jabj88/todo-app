@@ -52,8 +52,10 @@ $getRangeData = function () {
             Here are some stats
         </h1>
         <h2 class="m-5 text-2xl">
-            From <input class="text-center bg-transparent" type="date" wire:model='from' wire:change='getRangeData' />
-            To <input class="text-center bg-transparent "type="date" wire:model='to' wire:change='getRangeData' />
+            From <input class="text-center bg-transparent" style="color-scheme:dark" type="date" wire:model='from'
+                wire:change='getRangeData' />
+            To <input class="text-center bg-transparent" style="color-scheme:dark" type="date" wire:model='to'
+                wire:change='getRangeData' />
         </h2>
         @if ($totalTasks == 0)
             <h2 class="m-5 text-2xl">
@@ -64,7 +66,7 @@ $getRangeData = function () {
             <div>You created a total of <span class="text-xl font-bold">{{ $totalTasks }}</span> tasks </div>
             <div>completed <span class="text-xl font-bold">{{ count($todosCompleted) }}</span>
                 And <span class="text-xl font-bold">{{ count($todosPending) }} </span>
-                @if (count($todosPending) >= 1)
+                @if (count($todosPending) <= 1)
                     is
                 @else
                     are
