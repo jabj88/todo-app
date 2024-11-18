@@ -8,6 +8,9 @@ with([
 ]);
 
 $add = function () {
+    if (!$this->task) {
+        return;
+    }
     \App\Models\Todo::create([
         'task' => $this->task,
         'status' => 'pending',

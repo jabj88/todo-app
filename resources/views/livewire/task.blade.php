@@ -16,6 +16,9 @@ $updateStatus = function () {
 };
 
 $updateTask = function () {
+    if (!$this->task) {
+        return;
+    }
     \App\Models\Todo::where('id', $this->todo->id)->update(['task' => $this->task]);
     $this->toggleReadyOnly();
 };
