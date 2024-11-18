@@ -8,7 +8,7 @@ with([
 ]);
 
 $add = function () {
-    if (!$this->task) {
+    if ($this->task === '') {
         return;
     }
     \App\Models\Todo::create([
